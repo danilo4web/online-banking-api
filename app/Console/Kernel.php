@@ -2,22 +2,24 @@
 
 namespace App\Console;
 
+use App\Console\Commands\StoreBitcoinQuoteCron;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     */
-    protected function schedule(Schedule $schedule): void
+    protected $commands = [
+        StoreBitcoinQuoteCron::class,
+    ];
+
+    protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        Log::info('kernel schedule running by cron...');
+
+        $schedule->command('bitcoin:store-quote')->everyTenMinutes();
     }
 
-    /**
-     * Register the commands for the application.
-     */
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
