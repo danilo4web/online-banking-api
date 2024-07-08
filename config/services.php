@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'gateways' => [
+        'bitcoin_url' => env('BITCOIN_URL'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
